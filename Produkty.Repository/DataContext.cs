@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Produkty.Data.DbModels;
 
 namespace Produkty.Repository
 {
@@ -8,5 +9,9 @@ namespace Produkty.Repository
         {
             
         }
+
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
     }
 }
