@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Produkty.Data.ModelsDto;
@@ -33,6 +34,19 @@ namespace Produkty.API.Controllers
 
             var product = await _service.GetProductAsync(productId);
             return Ok(product);
+        }
+        [HttpPut("{productId}")]
+        public async Task<IActionResult> UploadProduct([FromBody] UploadProductDto productDto,Guid productId)
+        {
+            if (!await _service.IsExist(productId))
+            {
+                return NotFound("Nie ma takiego produktu");
+            }
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            await _service.UploadProduct(productDto,productId);
+            return Ok();
+
         }
     }
 }

@@ -36,6 +36,12 @@ namespace Produkty.Service.Services
             return await GetProductAsync(product.Id);
         }
 
+        public async Task UploadProduct(UploadProductDto productDto, Guid productId)
+        {
+            var product = await _repository.FindAsync(a => a.Id == productId);
+            _mapper.Map(productDto, product);
+            await _repository.SaveAsync();
+        }
 
     }
 }

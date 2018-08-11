@@ -8,9 +8,10 @@ namespace Produkty.API.Helpers
     {
         public AutoMapperProduct()
         {
-            CreateMap<Product, ProductDto>().ForMember(a=>a.Category,opt=>opt.MapFrom(
+            CreateMap<Product, ProductDto>().ForMember(c=>c.Category,opt=>opt.MapFrom(
                 c=>c.Category.Name));
-            CreateMap<UploadProductDto, Product>();
+            CreateMap<UploadProductDto, Product>()
+                .ForMember(i=>i.Id,opt=>opt.Ignore());
         }
     }
 }

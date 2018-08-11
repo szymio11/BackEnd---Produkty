@@ -9,5 +9,6 @@ namespace Produkty.Service.Interfaces
         Task<ProductDto> CreateProductAsync(UploadProductDto productDto);
         Task<bool> IsExist(Guid productId);
         Task<ProductDto> GetProductAsync(Guid productId);
+        Task UploadProduct(UploadProductDto productDto, Guid productId);
     }
 }
