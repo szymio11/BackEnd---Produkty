@@ -6,6 +6,7 @@ namespace Produkty.Service.Interfaces
 {
     public interface IProductService
     {
+        Task DeleteProduct(Guid productId);
         Task<ProductDto> CreateProductAsync(UploadProductDto productDto);
         Task<bool> IsExist(Guid productId);
         Task<ProductDto> GetProductAsync(Guid productId);

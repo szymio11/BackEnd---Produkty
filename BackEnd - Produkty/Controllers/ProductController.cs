@@ -46,7 +46,17 @@ namespace Produkty.API.Controllers
                 return BadRequest(ModelState);
             await _service.UploadProduct(productDto,productId);
             return Ok();
+        }
+        [HttpDelete("{productId}")]
+        public async Task<IActionResult> DeleteProduct(Guid productId)
+        {
+            if (!await _service.IsExist(productId))
+            {
+                return NotFound("Nie ma takiego produktu");
+            }
 
+            await _service.DeleteProduct(productId);
+            return Ok();
         }
     }
 }

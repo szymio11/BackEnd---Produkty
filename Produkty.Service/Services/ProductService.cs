@@ -43,5 +43,10 @@ namespace Produkty.Service.Services
             await _repository.SaveAsync();
         }
 
+        public async Task DeleteProduct(Guid productId)
+        {
+            var product = await _repository.GetAsync(productId);
+            await _repository.DeleteAsyn(product);
+        }
     }
 }
