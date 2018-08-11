@@ -6,7 +6,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Produkty.Repository;
+using Produkty.Repository.Interfaces;
 using Produkty.Repository.Repositories;
+using Produkty.Service.Interfaces;
+using Produkty.Service.Services;
 
 namespace Produkty.API
 {
@@ -26,6 +29,8 @@ namespace Produkty.API
             services.AddMvc();
             services.AddAutoMapper();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
