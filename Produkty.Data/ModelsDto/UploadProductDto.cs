@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Produkty.Data.DbModels;
 
 namespace Produkty.Data.ModelsDto
 {

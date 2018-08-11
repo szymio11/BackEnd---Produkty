@@ -16,11 +16,14 @@ namespace Produkty.API.Controllers
             _service = service;
         }
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UploadProductDto productDto)
+        public async Task<IActionResult> CreateProduct([FromBody] UploadProductDto productDto)
         {
-            return NotFound();
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+            var product = await _service.CreateProductAsync(productDto);
+            return CreatedAtRoute("GetProduct", new { productId = product.Id}, product);
         }
-        [HttpGet("{productId}")]
+        [HttpGet("{productId}", Name="GetProduct")]
         public async Task<IActionResult> GetProduct(Guid productId)
         {
             if (!await _service.IsExist(productId))
@@ -28,7 +31,7 @@ namespace Produkty.API.Controllers
                 return NotFound("Nie ma takiego produktu");
             }
 
-            var product = await _service.GetProduct(productId);
+            var product = await _service.GetProductAsync(productId);
             return Ok(product);
         }
     }

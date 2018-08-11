@@ -10,6 +10,7 @@ namespace Produkty.API.Helpers
         {
             CreateMap<Product, ProductDto>().ForMember(a=>a.Category,opt=>opt.MapFrom(
                 c=>c.Category.Name));
+            CreateMap<UploadProductDto, Product>();
         }
     }
 }
