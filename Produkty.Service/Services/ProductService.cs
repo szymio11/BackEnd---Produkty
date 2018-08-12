@@ -57,5 +57,11 @@ namespace Produkty.Service.Services
             return result;
         }
         public async Task<bool> IsAnyExistAsync() => await _repository.IsAnyExistAsyn();
+
+        public async Task<bool> IsCategoryExistAsync(Guid categoryId)
+        {
+            return await _repository.IsCategoryExistAsyn(categoryId);
+        }
+
     }
 }

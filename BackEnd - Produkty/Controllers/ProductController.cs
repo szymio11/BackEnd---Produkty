@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Principal;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Produkty.Data.ModelsDto;
@@ -21,6 +20,10 @@ namespace Produkty.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+            if (!await _service.IsCategoryExistAsync(productDto.CategoryId))
+            {
+                return NotFound("Nie ma takiej Kateogrii");
+            }
             var product = await _service.CreateProductAsync(productDto);
             return CreatedAtRoute("GetProduct", new { productId = product.Id}, product);
         }
@@ -41,6 +44,11 @@ namespace Produkty.API.Controllers
             if (!await _service.IsExist(productId))
             {
                 return NotFound("Nie ma takiego produktu.");
+            }
+            
+            if (!await _service.IsCategoryExistAsync(productDto.CategoryId))
+            {
+                return NotFound("Nie ma takiej Kateogrii");
             }
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
