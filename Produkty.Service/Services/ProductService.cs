@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Produkty.Data.DbModels;
@@ -24,7 +25,7 @@ namespace Produkty.Service.Services
 
         public async Task<ProductDto> GetProductAsync(Guid productId)
         {
-            var product = await _repository.GetAsync(productId);
+            var product = await _repository.GetAsyn(productId);
             var productDto = _mapper.Map<ProductDto>(product);
             return productDto;
         }
@@ -45,8 +46,16 @@ namespace Produkty.Service.Services
 
         public async Task DeleteProduct(Guid productId)
         {
-            var product = await _repository.GetAsync(productId);
+            var product = await _repository.GetAsyn(productId);
             await _repository.DeleteAsyn(product);
         }
+
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
+        {
+            var product = await _repository.GetAllAsyn();
+            var result = _mapper.Map<IEnumerable<ProductDto>>(product);
+            return result;
+        }
+        public async Task<bool> IsAnyExistAsync() => await _repository.IsAnyExistAsyn();
     }
 }

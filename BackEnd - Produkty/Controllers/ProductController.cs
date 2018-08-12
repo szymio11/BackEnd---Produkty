@@ -29,7 +29,7 @@ namespace Produkty.API.Controllers
         {
             if (!await _service.IsExist(productId))
             {
-                return NotFound("Nie ma takiego produktu");
+                return NotFound("Nie ma takiego produktu.");
             }
 
             var product = await _service.GetProductAsync(productId);
@@ -40,7 +40,7 @@ namespace Produkty.API.Controllers
         {
             if (!await _service.IsExist(productId))
             {
-                return NotFound("Nie ma takiego produktu");
+                return NotFound("Nie ma takiego produktu.");
             }
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -52,11 +52,22 @@ namespace Produkty.API.Controllers
         {
             if (!await _service.IsExist(productId))
             {
-                return NotFound("Nie ma takiego produktu");
+                return NotFound("Nie ma takiego produktu.");
             }
 
             await _service.DeleteProduct(productId);
             return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllProducts()
+        {
+            if (!await _service.IsAnyExistAsync())
+            {
+                return NotFound("Nie ma żadnego produktu na liscie.");
+            }
+            var result = await _service.GetAllProductsAsync();
+
+            return Ok(result);
         }
     }
 }

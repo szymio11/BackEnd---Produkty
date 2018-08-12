@@ -1,12 +1,11 @@
-﻿using Produkty.Data.DbModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using Produkty.Data.DbModels;
 
-
-namespace AplikacjaKulinarna.Repository.Interfaces
+namespace Produkty.Repository.Interfaces
 {
     public interface IRepository<T> where T : BaseEntity
     {
@@ -21,7 +20,7 @@ namespace AplikacjaKulinarna.Repository.Interfaces
         IQueryable<T> GetAll();
         Task<ICollection<T>> GetAllAsyn();
         IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties);
-        Task<T> GetAsync(Guid id);
+        Task<T> GetAsyn(Guid id);
         Task<int> SaveAsync();
     }
 }

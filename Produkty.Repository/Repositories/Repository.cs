@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using AplikacjaKulinarna.Repository.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Produkty.Data.DbModels;
+using Produkty.Repository.Interfaces;
 
 namespace Produkty.Repository.Repositories
 {
@@ -36,7 +36,7 @@ namespace Produkty.Repository.Repositories
         }
 
 
-        public virtual async Task<T> GetAsync(Guid id)
+        public virtual async Task<T> GetAsyn(Guid id)
         {
             return await _entities.FindAsync(id);
         }
