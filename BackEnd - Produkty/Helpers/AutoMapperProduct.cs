@@ -12,6 +12,7 @@ namespace Produkty.API.Helpers
                 c=>c.Category.Name));
             CreateMap<UploadProductDto, Product>()
                 .ForMember(i=>i.Id,opt=>opt.Ignore());
+            CreateMap<Category,CategoryDto>();
         }
     }
 }
